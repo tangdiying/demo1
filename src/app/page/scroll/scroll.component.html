@@ -1,0 +1,10 @@
+<div>
+  <div class="container">
+    <div [ngStyle]="{'padding-top': padding+'px'}">
+      <nz-spin nzSimple *ngIf="isLoading"></nz-spin>
+    </div>
+    <p *ngFor="let item of data">{{item.name}}</p>
+    <nz-spin nzSimple *ngIf="isLoading"></nz-spin>
+  </div>
+</div>
+

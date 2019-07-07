@@ -1,0 +1,24 @@
+<div class="chat-message">
+  <nz-layout class="chat-message-layout">
+    <nz-sider class="chat-message-sider">
+      <div>
+        <nz-input-group [nzPrefix]="prefixIconSearch">
+          <input type="text" nz-input placeholder="搜索" />
+        </nz-input-group>
+        <ng-template #prefixIconSearch>
+          <i nz-icon nzType="search"></i>
+        </ng-template>
+      </div>
+      <div class="gossip-list">
+        <div class="gossip-item" *ngFor="let item of gossipdata">
+          <div class="gossip-logo">{{item.name}}</div>
+          <div class="gossip-body">
+            <p class="gossip-title">{{item.title}}<span>{{item.date}}</span></p>
+            <p class="gossip-content">{{item.content}}</p>
+          </div>
+        </div>
+      </div>
+    </nz-sider>
+    <nz-content class="chat-message-content"></nz-content>
+  </nz-layout>
+</div>
