@@ -1,0 +1,6 @@
+<div #container>
+  <div class="body" #body>
+      <ng-content #name></ng-content>
+  </div>
+  <div [hidden]="!isDraw" [ngStyle]="lineStyle" #line></div>
+</div>

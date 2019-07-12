@@ -1,0 +1,10 @@
+<div class="pageContainer" #pageContainer>
+    <div class="loadmore" [ngStyle]="{'padding-top':this.reachToppadding+'px'}">
+        <nz-spin class="topLoading" nzSimple *ngIf="isTopLoading"></nz-spin>
+    </div>
+    <ng-content></ng-content>
+    <!-- <div *ngFor="let item of items">{{item['id']}}---{{item['name']}}</div> -->
+    <div class="loadmore" [ngStyle]="{'padding-bottom': this.reachBottompadding+'px'}">
+        <nz-spin class="bottomLoading" nzSimple *ngIf="isBottomLoading"></nz-spin>
+    </div>
+</div>

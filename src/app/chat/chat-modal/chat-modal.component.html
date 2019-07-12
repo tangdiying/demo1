@@ -1,0 +1,62 @@
+<div cdkDrag *ngIf="isChatModalVisible">
+    <nz-modal 
+    cdkDrag
+    [(nzVisible)]="isChatModalVisible" 
+    [nzTitle]="null" 
+    (nzOnCancel)="handleCancel()" 
+    (nzOnOk)="handleOk()" 
+    [nzClosable]="true" 
+    [nzFooter]="null"
+    class="chat-modal">
+    <nz-layout class="chat-modal-layout">
+        <nz-sider nzWidth="60px" class="chat-modal-leftmenu">
+          <div class="logo"></div>
+          <div><button class="chat-left-btn-message" (click)="changeRoute('/message')"><i nz-icon nzType="message" nzTheme="outline"></i></button></div>
+          <div><button class="chat-left-btn-user" (click)="changeRoute('/user')"><i nz-icon nzType="user" nzTheme="outline"></i></button></div>
+        </nz-sider>
+        <nz-content>
+          <div class="chat-modal-con">
+              <router-outlet></router-outlet>
+          </div>
+        </nz-content>
+      </nz-layout>
+    </nz-modal>
+</div>
+
+<button nz-button nzType="default" nzShape="circle" (click)="showChatModal()"><i nz-icon nzType="wechat" nzTheme="outline"></i></button>
+<nz-select style="width: 200px;" [(ngModel)]="singleValue" nzShowSearch (nzBlur)="obblur($event)" (nzOnSearch)="onInput($event)">
+  <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+</nz-select>
+<div>
+    <input id="myCar" list="cars" />
+    <datalist id="cars">
+      <option *ngFor="let option of planList" [value]="option.label"></option>
+    </datalist>
+</div>
+<!-- <nz-calendar>
+    <ul *nzDateCell="let date" class="events">
+      <ng-container [ngSwitch]="date.getDate()">
+        <ng-container *ngSwitchCase="8">
+          <li *ngFor="let item of listDataMap.eight">
+            <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
+          </li>
+        </ng-container>
+        <ng-container *ngSwitchCase="10">
+          <li *ngFor="let item of listDataMap.ten">
+            <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
+          </li>
+        </ng-container>
+        <ng-container *ngSwitchCase="11">
+          <li *ngFor="let item of listDataMap.eleven">
+            <nz-badge [nzStatus]="item.type" [nzText]="item.content"></nz-badge>
+          </li>
+        </ng-container>
+      </ng-container>
+    </ul>
+    <ng-container *nzMonthCell="let month">
+      <div *ngIf="getMonthData(month) as monthData" class="notes-month">
+        <section>{{ monthData }}</section>
+        <span>Backlog number</span>
+      </div>
+    </ng-container>
+  </nz-calendar> -->

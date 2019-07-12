@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+/* .chat-modal{
+
+} */
+@import "./assets/select.css";
+@import '~@angular/cdk/overlay-prebuilt.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* @import "~ng-zorro-antd/spin/style/index.min.css";  */
+.chat-modal .ant-modal-body{
+    padding: 0;
+    height: 500px;
+}
+.chat-modal-layout{
+    height: 100%;
+    background: white;
+}
+.chat-left-btn-message{
+    background: transparent;
+    border: 0;
+    color: white;
+    font-size: 20px;
+}
+.chat-left-btn-user{
+    background: transparent;
+    border: 0;
+    color: white;
+    font-size: 20px;
+
+}
+.chat-modal-leftmenu.ant-layout-sider{
+    background: #142D40;
+}
+.message-leftmenu.ant-layout-sider{
+    background: #e5e5e5;
+}
+.message-leftmenu .ant-layout-header{
+    background: #e5e5e5;
+}
+.user-leftmenu.ant-layout-sider{
+    background: #e5e5e5;
+}
+.user-leftmenu .ant-layout-header{
+    background: #e5e5e5;
+}

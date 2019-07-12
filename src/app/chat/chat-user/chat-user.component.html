@@ -1,0 +1,31 @@
+<div class="chat-user">
+    <nz-layout class="user-layout">
+        <nz-sider class="user-leftmenu">
+            <nz-input-group [nzSuffix]="suffixIcon">
+                <input type="text" nz-input placeholder="Search" [(ngModel)]="searchValue" />
+              </nz-input-group>
+              <ng-template #suffixIcon>
+                <i nz-icon nzType="search"></i>
+              </ng-template>
+              <nz-tree
+                [nzData]="nodes"
+                [nzSearchValue]="searchValue"
+                (nzClick)="nzEvent($event)"
+                (nzExpandChange)="nzEvent($event)"
+                (nzSearchValueChange)="nzEvent($event)"
+              >
+              </nz-tree>
+        </nz-sider>
+        <nz-content>
+          <div class="userinfo">
+            <div class="userinfo-header"></div>
+            <div class="userinfo-body">
+              <p *ngFor="let item of userinfoDataColumn">{{item.label}}<span>{{userinfoData[item.prop]}}</span></p>
+            </div>
+            <div class="userinfo-btn">
+              <button class="userinfo-btn-send">发消息</button>
+            </div>
+          </div>
+        </nz-content>
+      </nz-layout>
+</div>

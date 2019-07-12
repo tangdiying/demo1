@@ -1,0 +1,25 @@
+
+.message{
+    height: 100%;
+}
+.message-layout{
+    height: 100%;
+}
+.message-item{
+    display: flex;
+    align-items: center;
+}
+.message-logo{
+    background: rgb(210, 58, 58);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: white;
+    line-height: 28px;
+    text-align: center;
+    font-size: 18px;
+    margin: auto 20px;
+}
+.message-people,.message-content{
+    margin-bottom: 0;
+}
