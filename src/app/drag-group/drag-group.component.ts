@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-
 @Component({
-  selector: 'app-demo5',
-  templateUrl: './demo5.component.html',
-  styleUrls: ['./demo5.component.css']
+  selector: 'app-drag-group',
+  templateUrl: './drag-group.component.html',
+  styleUrls: ['./drag-group.component.css']
 })
-export class Demo5Component implements OnInit {
+export class DragGroupComponent implements OnInit {
+  timePeriods = [
+    'Bronze age111' ,
+     'Iron age222' ,
+     'Middle ages333' ,
+     'Early modern period444' ,
+     'Long nineteenth century555'
+  ];
   todo = [
     {label:"tdy",age:18},
     {label:"hwx",age:15}
@@ -35,7 +42,9 @@ export class Demo5Component implements OnInit {
   ]
   drop(event: CdkDragDrop<string[]>) {
     console.log(event)
-    console.log(event.previousContainer,event.container)
+    moveItemInArray( this.timePeriods, event.previousIndex, event.currentIndex);
+  }
+  drop1(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -44,9 +53,9 @@ export class Demo5Component implements OnInit {
                         event.previousIndex,
                         event.currentIndex);
     }
-    console.log(this.lists)
+    // console.log(this.lists)
   }
-  constructor() { }
+  constructor(public http:HttpClient) { }
 
   ngOnInit() {
   }

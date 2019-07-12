@@ -23,6 +23,12 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { Demo10Component } from './demo10/demo10.component';
 import { Demo11Component } from './demo11/demo11.component';
 import { CanDeactivateGuard } from './candeactivate';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { Demo12Component } from './demo12/demo12.component';
+import { FormsModule } from '@angular/forms';
+import { DragGroupComponent } from './drag-group/drag-group.component';
+import { Demo13Component } from './demo13/demo13.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +44,10 @@ import { CanDeactivateGuard } from './candeactivate';
     Demo9Component,
     ResizeComponent,
     Demo10Component,
-    Demo11Component
+    Demo11Component,
+    Demo12Component,
+    DragGroupComponent,
+    Demo13Component
   ],
   imports: [
     BrowserModule,
@@ -48,7 +57,9 @@ import { CanDeactivateGuard } from './candeactivate';
     DragDropModule,
     OverlayModule,
     PortalModule,
-    NzSpinModule
+    NzSpinModule,
+    NzAutocompleteModule,
+    FormsModule
   ],
   providers: [{provide: OverlayContainer, useClass: FullscreenOverlayContainer},CanDeactivateGuard],
   bootstrap: [AppComponent],

@@ -33,8 +33,9 @@
           <div class="example-box" *ngFor="let item of done1" cdkDrag>{{item.label}}</div>
         </div>
       </div> -->
-      <div class="example-container" *ngFor="let list of lists">
-          <div class="example-list" cdkDropList [cdkDropListData]="list"  (cdkDropListDropped)="drop($event)">
+      <div class="example-container" *ngFor="let list of lists" cdkDrag>
+          <div class="example-list" cdkDropList [cdkDropListData]="list"  cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)" >
+            <h1>title</h1>
               <div cdkDrag class="example-box" [cdkDragData]="item" *ngFor="let item of list">{{item.label}}</div>
             </div>
       </div>
