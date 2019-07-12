@@ -1,0 +1,32 @@
+.chat-modal .ant-modal-body{
+  height: 500px;
+  padding: 0;
+}
+/* 26292D */
+.chat-modal-layout.ant-layout{
+  height: 100%;
+}
+.chat-modal-sider.ant-layout-sider{
+  background-color: #26292D;
+}
+.chat-leftmenu-btn i{
+  color: #7E7E7F;
+  font-size: 20px;
+}
+.chat-modal-body{
+  height: 100%;
+}
+.chat-message-sider.ant-layout-sider{
+  background-color: #E6E7E8;
+  height: 100%;
+}
+.chat-message-layout.ant-layout{
+  height: 100%;
+}
+.chat-user-sider.ant-layout-sider{
+  background-color: #E6E7E8;
+  height: 100%;
+}
+.chat-user-layout.ant-layout{
+  height: 100%;
+}

@@ -1,0 +1,13 @@
+<div class="chat-user">
+  <nz-layout class="chat-user-layout">
+    <nz-sider class="chat-user-sider">
+      <nz-input-group [nzPrefix]="prefixIconSearch">
+        <input type="text" nz-input placeholder="搜索" />
+      </nz-input-group>
+      <ng-template #prefixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </nz-sider>
+    <nz-content class="chat-user-content"></nz-content>
+  </nz-layout>
+</div>
