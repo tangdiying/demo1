@@ -32,6 +32,8 @@ import { Demo14Component } from './demo14/demo14.component';
 import {ChatModalComponent} from './chat/chat-modal/chat-modal.component';
 import { Demo15Component } from './demo15/demo15.component'
 import { DragulaModule } from 'ng2-dragula';
+import { CascaderComponent } from './cascader/cascader.component';
+import { Demo16Component } from './demo16/demo16.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { DragulaModule } from 'ng2-dragula';
     DragGroupComponent,
     Demo13Component,
     Demo14Component,
-    Demo15Component
+    Demo15Component,
+    CascaderComponent,
+    Demo16Component
   ],
   imports: [
     BrowserModule,
