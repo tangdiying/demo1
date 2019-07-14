@@ -23,13 +23,16 @@ export class Demo15Component implements OnInit {
     {
       name: 'Group B',
       items: [{name: 'Item 1'}, {name: 'Item 2'}, {name: 'Item 3'}, {name: 'Item 4'}]
+    },
+    {
+      name: 'Group C',
+      items: [{name: 'Item *1'}, {name: 'Item *2'}, {name: 'Item *3'}, {name: 'Item *4'}]
+    },
+    {
+      name: 'Group D',
+      items: [{name: 'Item ~1'}, {name: 'Item ~2'}, {name: 'Item ~3'}, {name: 'Item ~4'}]
     }
   ];
-  vampires = [
-    {name:"tdy1",favouriteColor:"apple"},
-    {name:"tdy2",favouriteColor:"apple"},
-    {name:"tdy3",favouriteColor:"apple"}
-  ]
   ngOnInit() {
     // this.dragulaService.drop("COLUMNS").subscribe(res=>{
     //   console.log(res)

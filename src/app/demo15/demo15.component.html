@@ -1,15 +1,11 @@
 <div class="wrapper" dragula="COLUMNS" [(dragulaModel)]="groups">
-  <div class="container" *ngFor="let group of groups">
-    <span class="group-handle">{{group.name}}</span>
-    <div class="container" dragula="ITEMS" [(dragulaModel)]="group.items">
-      <div *ngFor="let item of group.items" [innerHtml]="item.name"></div>
+  <div class="example-list" *ngFor="let group of groups">
+    <div class="group-handle">{{group.name}}</div>
+    <div class="example-box" dragula="ITEMS" [(dragulaModel)]="group.items">
+      <div class="example-item" *ngFor="let item of group.items" [innerHtml]="item.name"></div>
     </div>
   </div>
 </div>
+<!-- <div class="demo1">
 
-<ul dragula="VAMPIRES" [(dragulaModel)]="vampires">
-  <li *ngFor="let vamp of vampires">
-    {{ vamp.name }} likes {{ vamp.favouriteColor }}
-  </li>
-</ul>
-{{vampires|json}}
+</div> -->
