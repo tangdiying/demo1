@@ -14,7 +14,6 @@ import { ChatMessageComponent } from './chat-message/chat-message.component';
 import { ChatUserComponent } from './chat-user/chat-user.component';
 import { ChatRecordComponent } from './chat-record/chat-record.component';
 import { ChatContentComponent } from './chat-content/chat-content.component';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 registerLocaleData(zh);
 @NgModule({
   declarations: [ChatModalComponent, ChatMessageComponent, ChatUserComponent, ChatRecordComponent, ChatContentComponent],

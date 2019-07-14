@@ -28,6 +28,10 @@ import { Demo12Component } from './demo12/demo12.component';
 import { FormsModule } from '@angular/forms';
 import { DragGroupComponent } from './drag-group/drag-group.component';
 import { Demo13Component } from './demo13/demo13.component';
+import { Demo14Component } from './demo14/demo14.component';
+import {ChatModalComponent} from './chat/chat-modal/chat-modal.component';
+import { Demo15Component } from './demo15/demo15.component'
+import { DragulaModule } from 'ng2-dragula';
 
 @NgModule({
   declarations: [
@@ -47,7 +51,9 @@ import { Demo13Component } from './demo13/demo13.component';
     Demo11Component,
     Demo12Component,
     DragGroupComponent,
-    Demo13Component
+    Demo13Component,
+    Demo14Component,
+    Demo15Component
   ],
   imports: [
     BrowserModule,
@@ -59,10 +65,11 @@ import { Demo13Component } from './demo13/demo13.component';
     PortalModule,
     NzSpinModule,
     NzAutocompleteModule,
-    FormsModule
+    FormsModule,
+    DragulaModule.forRoot()
   ],
   providers: [{provide: OverlayContainer, useClass: FullscreenOverlayContainer},CanDeactivateGuard],
   bootstrap: [AppComponent],
-  exports: []
+  exports: [],
 })
 export class AppModule { }
