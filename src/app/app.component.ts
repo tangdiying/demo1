@@ -47,7 +47,13 @@ export class AppComponent implements OnInit{
           label: '导航',
           children: [{
               value: 'cexiangdaohang',
-              label: '侧向导航'
+              label: '侧向导航',
+              children:[
+                {
+                  value:"lalalal",
+                  label:"lalallaa"
+                }
+              ]
           }, {
               value: 'dingbudaohang',
               label: '顶部导航'

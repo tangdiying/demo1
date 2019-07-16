@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DragulaService } from 'ng2-dragula';
-
+import * as _ from "lodash"
 @Component({
   selector: 'app-demo15',
   templateUrl: './demo15.component.html',
@@ -43,6 +43,10 @@ export class Demo15Component implements OnInit {
     this.dragulaService.dragend("COLUMNS").subscribe(res=>{
       console.log(res)
     })
+  }
+  additem(group){
+    let index = _.findIndex(this.groups,group)
+    this.groups[index]['items'].push({"name":"tdy"})
   }
 
 }

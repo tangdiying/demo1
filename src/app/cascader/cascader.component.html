@@ -1,8 +1,16 @@
-<div>
+<!-- <div>
   <p (click)="toggle()">{{dataList['label']}}</p>
   <ul *ngIf="expend&&dataList['children']">
     <li *ngFor="let item of dataList['children']">
       <app-cascader [dataList]="item"></app-cascader>
     </li>
   </ul>
+</div> -->
+<!-- <div class="content" *ngIf="dataList||dataList['children']">
+    <app-cascader *ngFor="let item of dataList" [dataList]="item"></app-cascader>
+</div> -->
+<div class="contain">
+    <div class="content" *ngFor="let item of mydata;let col = index">
+      <div *ngFor="let el of item;let row = index" (click)="renderData(col,row,el)">{{el['label']}}</div>
+    </div>
 </div>

@@ -1,0 +1,10 @@
+.content{
+    border: 1px solid #ccc;
+    width: 100px;
+    height: 100px;
+}
+.contain{
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+}

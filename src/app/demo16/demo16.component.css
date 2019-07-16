@@ -1,0 +1,8 @@
+.showModal{
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+.content{
+    border: 1px solid #ccc;
+    width: 100px;
+}

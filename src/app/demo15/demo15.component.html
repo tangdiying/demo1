@@ -3,6 +3,7 @@
     <div class="group-handle">{{group.name}}</div>
     <div class="example-box" dragula="ITEMS" [(dragulaModel)]="group.items">
       <div class="example-item" *ngFor="let item of group.items" [innerHtml]="item.name"></div>
+      <div class="example-item" (click)="additem(group)">+</div>
     </div>
   </div>
 </div>

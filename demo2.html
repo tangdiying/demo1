@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .scroll{
+            height: 1000px;
+            width: 500px;
+            background-color: lightblue;
+            line-height: 1000px;
+            text-align: center;
+        }
+        body{
+            overflow: scroll;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="show()" style="position:fixed;top:50%"> click</button>  
+    <div class="scroll">
+        nihao 
+    </div>
+        <script type="text/javascript">
+        let content = document.querySelector(".scroll")
+        function show(){
+            // console.log(content.scrollTop)
+            // content.scrollTop = 500
+            // console.log(content.scrollTop)
+            console.log(document.body.clientHeight)
+            debugger
+            scrollTo(0,content.scrollHeight/2-document.body.clientHeight/2)
+        }
+        scrollTo(0,content.scrollHeight/2-content.clientHeight/2)
+        console.log(content.scrollTo)
+        show.bind(this)()
+        </script>
+</body>
+</html>

@@ -1,3 +1,14 @@
-<p>
-  demo16 works!
-</p>
+<button class="showModal" (click)="showModal()"><span>Show Modal</span></button>
+<nz-modal 
+[(nzVisible)]="isVisible" 
+[nzTitle]="null" 
+[nzFooter]="null"
+(nzOnCancel)="handleCancel()" 
+(nzOnOk)="handleOk()">
+    <!-- <div class="content">
+        <div *ngFor="let item of cascaderData">{{item.label}}</div>
+    </div> -->
+    <!-- <div class="content" *ngIf="cascaderData||cascaderData['children']"> -->
+        <app-cascader [dataList]="cascaderData"></app-cascader>
+    <!-- </div> -->
+</nz-modal>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" model="demo2">
+    <div class="demo1" model="demo2" vclick="reduce()">123</div>
+    <button> click</button>
+    <script>
+        let demo1 = document.querySelector(".demo1");
+        // demo1.setAttribute("model")
+        let nodes = document.body.children
+        let args;
+        let attrVal;
+        var demo2 = 789
+        function reduce(){
+            console.log("reduce")
+        }
+        for(let i = 0;i<nodes.length;i++){
+            let node = nodes[i]
+            if(node.hasAttribute("model")){
+                attrVal = node.getAttribute("model")
+                if(window.hasOwnProperty(attrVal)){
+                    node.setAttribute("model",window[attrVal])
+                }
+            }
+            myobj = node
+            if(node.hasAttribute("vclick")){
+                node.addEventListener("click",function(){
+                    attrVal = node.getAttribute("vclick")
+                    window[attrVal.replace("()","")]
+                    window[attrVal.replace("()","")]()
+                })
+            }
+        }
+        document.querySelector("button").addEventListener("click",function(){
+            return reduce.bind(this);
+        })
+        console.log(demo1.getAttribute("model"))
+    </script>
+</body>
+</html>

@@ -34,7 +34,8 @@ import { Demo15Component } from './demo15/demo15.component'
 import { DragulaModule } from 'ng2-dragula';
 import { CascaderComponent } from './cascader/cascader.component';
 import { Demo16Component } from './demo16/demo16.component';
-
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { ModalComponent } from './modal/modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +58,9 @@ import { Demo16Component } from './demo16/demo16.component';
     Demo14Component,
     Demo15Component,
     CascaderComponent,
-    Demo16Component
+    Demo16Component,
+    ModalComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ import { Demo16Component } from './demo16/demo16.component';
     NzSpinModule,
     NzAutocompleteModule,
     FormsModule,
-    DragulaModule.forRoot()
+    DragulaModule.forRoot(),
+    NzModalModule
   ],
   providers: [{provide: OverlayContainer, useClass: FullscreenOverlayContainer},CanDeactivateGuard],
   bootstrap: [AppComponent],
