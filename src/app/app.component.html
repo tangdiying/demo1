@@ -31,6 +31,7 @@
       <app-demo10 [doMoreData]="doMoreData" 
       (pageIndexChange)="pageIndexChange($event)"
       (getres)="getres($event)"
+      [limit]="limit"
       >
       <div>
           <div *ngFor="let item of items" class="item">{{item['id']}}---{{item['name']}}</div>

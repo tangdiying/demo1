@@ -16,7 +16,8 @@ export class AppComponent implements OnInit{
   isBottomLoading:boolean = false;
   items = []
   Demo10Component;
-  demo1 = false
+  demo1 = false;
+  limit:number = 20;
   demo3(){
 
   }
