@@ -1,4 +1,4 @@
-<div class="wrapper" dragula="COLUMNS" [(dragulaModel)]="groups">
+<div class="wrapper" dragula="COLUMNS" [(dragulaModel)]="groups" (dragstart)="dragstart($event)">
   <div class="example-list" *ngFor="let group of groups">
     <div class="group-handle">{{group.name}}</div>
     <div class="example-box" dragula="ITEMS" [(dragulaModel)]="group.items">

@@ -2,15 +2,17 @@ import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, Input }
 import { HttpClient } from '@angular/common/http';
 import * as _ from "lodash"
 import { delay, distinctUntilChanged, distinct, throttleTime, throttle } from 'rxjs/operators';
+
 @Component({
-  selector: 'app-demo10',
-  templateUrl: './demo10.component.html',
-  styleUrls: ['./demo10.component.css']
+  selector: 'app-demo18',
+  templateUrl: './demo18.component.html',
+  styleUrls: ['./demo18.component.css']
 })
-export class Demo10Component implements OnInit {
+export class Demo18Component implements OnInit {
+
   @ViewChild("pageContainer") pageContainer:ElementRef;
   @Input() limit:number = 20;
-  items = []
+  items = [];
   isBottomLoading:boolean = false;
   isTopLoading:boolean = false;
   reachBottom:boolean = false;
@@ -22,9 +24,9 @@ export class Demo10Component implements OnInit {
   topWaitSetTimeout;
   bottomSetTimeout;
   bottomWaitSetTimeout;
-  @Input() doMoreData
-  @Output() pageIndexChange = new EventEmitter<any>()
-  @Output() getres = new EventEmitter<any>()
+  @Input() doMoreData;
+  @Output() pageIndexChange = new EventEmitter<any>();
+  @Output() getres = new EventEmitter<any>();
   constructor(
     private http:HttpClient
   ) { }
@@ -68,6 +70,7 @@ export class Demo10Component implements OnInit {
         clearTimeout(this.topWaitSetTimeout)
         clearTimeout(this.topSetTimeout)
         this.isTopLoading = true
+        debugger
         this.topSetTimeout = setTimeout(() => {
           this.isTopLoading = false;
           this.reachToppadding = 0;
@@ -76,7 +79,6 @@ export class Demo10Component implements OnInit {
     }
   }
   scrollReachBottom(e){
-    console.log(this.reachBottompadding)
     if(this.reachBottom&&e.deltaY>0){
       if(this.reachBottompadding<30){
         clearTimeout(this.bottomWaitSetTimeout)
@@ -99,6 +101,7 @@ export class Demo10Component implements OnInit {
           this.page++
         })
       }
+    }
   }
-  }
+
 }

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { ChatModule } from './chat/chat.module';
 import { Demo1Component } from './demo1/demo1.component';
 import { Demo2Component } from './demo2/demo2.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Demo3Component } from './demo3/demo3.component';
 import { Demo4Component } from './demo4/demo4.component';
@@ -36,6 +36,11 @@ import { CascaderComponent } from './cascader/cascader.component';
 import { Demo16Component } from './demo16/demo16.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { ModalComponent } from './modal/modal.component';
+import { NoopInterceptorService } from './subject/noop-interceptor.service';
+import { Demo17Component } from './demo17/demo17.component';
+import { NzTableModule } from 'ng-zorro-antd';
+import { Demo18Component } from './demo18/demo18.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +65,8 @@ import { ModalComponent } from './modal/modal.component';
     CascaderComponent,
     Demo16Component,
     ModalComponent,
+    Demo17Component,
+    Demo18Component,
     
   ],
   imports: [
@@ -74,9 +81,14 @@ import { ModalComponent } from './modal/modal.component';
     NzAutocompleteModule,
     FormsModule,
     DragulaModule.forRoot(),
-    NzModalModule
+    NzModalModule,
+    NzTableModule
   ],
-  providers: [{provide: OverlayContainer, useClass: FullscreenOverlayContainer},CanDeactivateGuard],
+  providers: [
+    {provide: OverlayContainer, useClass: FullscreenOverlayContainer},
+    CanDeactivateGuard,
+    {provide:HTTP_INTERCEPTORS,useClass:NoopInterceptorService,multi:true}
+  ],
   bootstrap: [AppComponent],
   exports: [],
 })

@@ -87,11 +87,11 @@ export class AppComponent implements OnInit{
   }
   pageIndexChange(e){
     this.page = e;
-    console.log(e)
+    // console.log(e)
   }
   getres(res){
     this.items = _.concat(this.items,res['data'])
-    console.log(res)
+    // console.log(res)
   }
   demo2(){
     this.demo1 = !this.demo1

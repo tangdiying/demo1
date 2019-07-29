@@ -21,10 +21,38 @@
 
 
 
-  <div class="example-container" cdkDropListGroup>
-        <div class="example-list" [cdkDropListData]="move.data" cdkDropList *ngFor="let move of moves" (cdkDropListExited)="exit($event)" (cdkDropListDropped)="drop($event)" cdkDrag>
-            <div class="example-box" [cdkDragData]="item" *ngFor="let item of move.data" cdkDrag>
-              {{item.name}}
-            </div>
+<!-- <div class="example-container" cdkDropListGroup>
+    <div class="example-list" [cdkDropListData]="move.data" 
+    cdkDropList *ngFor="let move of moves;let i = index"  (cdkDropListDropped)="drop($event)">
+        <div class="example-box" [cdkDragData]="item" *ngFor="let item of move.data" cdkDrag>
+          {{item.name}}
         </div>
+    </div>
+</div> -->
+<div class="example-container">
+  <div cdkDropList style="display: flex" cdkDropListOrientation="horizontal"  (cdkDropListDropped)="dropColunmn($event)">
+      <div *ngFor="let move of moves;let i = index" cdkDrag >
+          <div class="example-list" [id]="move['name']" 
+          [cdkDropListData]="move.data" 
+          cdkDropList 
+          [cdkDropListConnectedTo]="idName"  
+          (cdkDropListDropped)="drop($event)"
+          [cdkDropListEnterPredicate]="noReturnPredicate">
+              <div class="example-box" [cdkDragData]="item" *ngFor="let item of move.data" cdkDrag>
+                {{item.name}}
+              </div>
+          </div>
+      </div>
   </div>
+  
+  <!-- <div class="example-list" [id]="move['name']" 
+  [cdkDropListData]="move.data" 
+  *ngFor="let move of moves;let i = index"
+  cdkDropList 
+  [cdkDropListConnectedTo]="idName"  
+  (cdkDropListDropped)="drop($event)">
+      <div class="example-box" [cdkDragData]="item" *ngFor="let item of move.data" cdkDrag>
+        {{item.name}}
+      </div>
+  </div> -->
+</div>

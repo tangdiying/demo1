@@ -8,30 +8,23 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class Demo14Component implements OnInit {
   moves = [
-    {data:[{name:"demo1"},{name:"demo2"},{name:"demo3"}],enter:true},
-    {data:[{name:"demo4"},{name:"demo5"},{name:"demo6"}],enter:true},
-    {data:[{name:"demo7"},{name:"demo8"},{name:"demo9"}],enter:true}
+    {data:[{name:"demo1"},{name:"demo2"},{name:"demo3"}],enter:true,name:"index1"},
+    {data:[{name:"demo4"},{name:"demo5"},{name:"demo6"}],enter:true,name:"index2"},
+    {data:[{name:"demo7"},{name:"demo8"},{name:"demo9"}],enter:true,name:"index3"}
   ]
+  idName = ['index1','index2','index3']
   isChange:boolean = true;
   constructor() { }
 
   ngOnInit() {
   }
-  // drop(event: CdkDragDrop<string[]>) {
-  //   if (event.previousContainer === event.container) {
-  //     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-  //   } else {
-  //     transferArrayItem(event.previousContainer.data,
-  //                       event.container.data,
-  //                       event.previousIndex,
-  //                       event.currentIndex);
-  //   }
-  // }
+  dropColunmn(event: CdkDragDrop<string[]>){
+    moveItemInArray(this.moves, event.previousIndex, event.currentIndex);
+  }
   drop(event: CdkDragDrop<string[]>) {
-    // if()
-    if (event.previousContainer === event.container) {
+    if (event.previousContainer === event.container) {//不跨列拖拽数据
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
+    } else {//跨列拖拽数据
       transferArrayItem(event.previousContainer.data,
                         event.container.data,
                         event.previousIndex,
@@ -44,5 +37,8 @@ export class Demo14Component implements OnInit {
   }
   enterStatus(){
     return true;
+  }
+  noReturnPredicate(){
+    return false;
   }
 }

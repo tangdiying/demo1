@@ -27,15 +27,24 @@
 </app-squire-seclet> -->
   <!-- <app-demo8></app-demo8> -->
   <!-- <app-demo9 [listheight]="listheight" [listitemheight]="listitemheight"></app-demo9> -->
-  <!-- <div style="width: 200px;height: 250px">
+  <div style="width: 200px;height: 100px;">
       <app-demo10 [doMoreData]="doMoreData" 
       (pageIndexChange)="pageIndexChange($event)"
       (getres)="getres($event)"
       >
-          <div *ngFor="let item of items">{{item['id']}}---{{item['name']}}</div>
+      <div>
+          <div *ngFor="let item of items" class="item">{{item['id']}}---{{item['name']}}</div>
+      </div>
       </app-demo10>
+  </div>
+  <!-- <div style="width: 200px;height: 100px;">
+      <app-demo18 [doMoreData]="doMoreData" 
+      (pageIndexChange)="pageIndexChange($event)"
+      (getres)="getres($event)"
+      >
+          <div *ngFor="let item of items" class="item">{{item['id']}}---{{item['name']}}</div>
+      </app-demo18>
   </div> -->
-  
   <!-- <app-demo11 [(demo1)]="demo1" [demo3]="demo3"></app-demo11>
   <button (click)="demo2()">click</button> -->
   <!-- <app-demo12></app-demo12> -->
@@ -43,5 +52,6 @@
   <!-- <app-demo13></app-demo13> -->
   <!-- <app-demo14></app-demo14> -->
   <!-- <app-demo15></app-demo15> -->
-  <!-- <app-cascader [dataList]="item" *ngFor="let item of cascaderData"></app-cascader> -->
-  <app-demo16></app-demo16>
+  <!-- <app-cascader [dataList]="cascaderData" *ngFor="let item of cascaderData"></app-cascader> -->
+  <!-- <app-demo16></app-demo16> -->
+<!-- <app-demo17></app-demo17> -->

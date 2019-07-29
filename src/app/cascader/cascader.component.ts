@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, ViewChild } from '@angular/core';
 import * as _ from 'lodash'
 import { element } from '@angular/core/src/render3';
 import { unwrapResolvedMetadata } from '@angular/compiler';
@@ -11,11 +11,11 @@ export class CascaderComponent implements OnInit,OnDestroy {
   @Input() dataList = []
   mydata = []
   constructor() { }
-
+  @ViewChild("tdy") tdy
   ngOnInit() {
     this.renderDepth(this.dataList)
     this.initData(this.dataList)
-    
+    console.log(this.tdy)
   }
   ngOnDestroy(){
     console.log("destory")
@@ -27,6 +27,7 @@ export class CascaderComponent implements OnInit,OnDestroy {
       return;
     }
     this.maxdepth++;
+    // debugger
     data.forEach(element => {
       element['depth'] = this.maxdepth
       if(element.hasOwnProperty("children")){
