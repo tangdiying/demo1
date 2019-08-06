@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,6 @@ export class SubjectService {
       page:page,
       limit:limit
     }
-    return this.http.get("http://192.168.50.187:3000/getAllData",{params:params})
+    return this.http.get("http://192.168.50.187:3000/getAllData",{params:params}).pipe(delay(8000))
   }
 }

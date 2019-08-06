@@ -22,6 +22,7 @@ export class GroupEntryComponent implements OnInit,OnChanges {
   Demo10Component;
   demo1 = false;
   limit:number = 20;
+  isGetData = false;
   demo3(){
 
   }
@@ -37,10 +38,16 @@ export class GroupEntryComponent implements OnInit,OnChanges {
     for(let i=0;i<20;i++){
       this.squareArray.push(i)
     }
-    this.getData();
+    // this.getData();
     // setInterval(()=>{
     //   console.log(this)
     // },1000)
+    this.page++;
+    this.server.getData(this.page,20)
+    .subscribe(res=>{
+      this.items = _.concat(this.items,res)
+      // this.isGetData = true
+    })
 
   }
   doMoreData(){
@@ -66,6 +73,7 @@ export class GroupEntryComponent implements OnInit,OnChanges {
     this.server.getData(this.page,20)
     .subscribe(res=>{
       this.items = _.concat(this.items,res)
+      this.isGetData = true
     })
   }
 

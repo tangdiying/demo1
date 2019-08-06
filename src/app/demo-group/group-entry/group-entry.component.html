@@ -31,7 +31,8 @@
       <app-demo10
       [items]="items"
       (afterReachBottom)="getData($event)"
-      [wrapClass]="'page'"
+      [wrapHeight]="200"
+      [isGetData]="isGetData"
       >
       <div>
           <div *ngFor="let item of items;let i = index" class="item">{{item['id']}}---{{item['name']}}</div>

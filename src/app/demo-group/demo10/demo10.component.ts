@@ -9,12 +9,7 @@ import { SubjectService } from '../subject/subject.service';
   styleUrls: ['./demo10.component.css']
 })
 export class Demo10Component implements OnInit,OnChanges{
-  ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
-    if(changes.hasOwnProperty("items")){
-      console.log(changes)
-      this.getSignal = true;
-    }
-  }
+  
   @ViewChild("pageContainer") pageContainer:ElementRef;
   @Input() limit:number = 20;
   // items = []
@@ -30,12 +25,14 @@ export class Demo10Component implements OnInit,OnChanges{
   bottomSetTimeout;
   bottomWaitSetTimeout;
   getSignal:boolean=false;
-  @Input() doMoreData;
-  @Input() items = []
-  @Output() pageIndexChange = new EventEmitter<any>();
-  @Output() getres = new EventEmitter<any>();
-  @Output() afterReachBottom = new EventEmitter<any>();
-  @Input() wrapClass = "page"
+  // @Input() doMoreData;
+  @Input() items = []//容器里面的数据，并没有什么用，只是用来转换检测数据变化的
+  @Input() wrapHeight = 100;//容器的高度
+  @Input() isGetData:boolean = false;
+  @Output() isGetDataChange = new EventEmitter<any>()
+  // @Output() pageIndexChange = new EventEmitter<any>();
+  // @Output() getres = new EventEmitter<any>();
+  @Output() afterReachBottom = new EventEmitter<any>();//到达底部后向外发送信号,需要获取页面数据
   constructor(
     private http:HttpClient,
     private service:SubjectService
@@ -46,6 +43,12 @@ export class Demo10Component implements OnInit,OnChanges{
     this.bind()
 
   }
+  ngOnChanges(changes: import("@angular/core").SimpleChanges): void {//检测到数据变化，如果数据变化，底部花花就消失
+    // if(changes.hasOwnProperty("items")){
+    //   console.log(changes)
+    //   this.getSignal = true;
+    // }
+  }
   getData(){
     // this.doMoreData().subscribe(res=>{
     //   this.getres.emit(res)
@@ -55,7 +58,6 @@ export class Demo10Component implements OnInit,OnChanges{
   }
   bind(){
     let  dom = this.pageContainer.nativeElement;
-    dom.classList.add(this.wrapClass)
     dom.addEventListener("scroll",(e)=>{
       if(e["srcElement"]['scrollTop']+e["srcElement"]['clientHeight']+10>e["srcElement"]['scrollHeight']){
         this.reachBottom = true
@@ -91,6 +93,7 @@ export class Demo10Component implements OnInit,OnChanges{
     }
   }
   scrollReachBottom(e){
+    console.log(this.isGetData)
     // console.log(this.reachBottompadding,this.reachBottom)
     if(this.reachBottom&&e.deltaY>0){
       if(this.reachBottompadding<30){
@@ -102,14 +105,23 @@ export class Demo10Component implements OnInit,OnChanges{
       }
       if(this.reachBottompadding>=30){
         clearTimeout(this.bottomWaitSetTimeout)
+        clearTimeout(this.bottomSetTimeout)
         this.isBottomLoading = true;
         this.afterReachBottom.emit();
-        if(this.getSignal){
+        if(this.isGetData){
           this.isBottomLoading = false;
           this.reachBottom = false;
           this.reachBottompadding = 0;
-          this.getSignal = false;
+          this.isGetData = false
+          this.isGetDataChange.emit(this.isGetData)
+          // this.getSignal = false;
         }
+        this.bottomSetTimeout = setTimeout(() => {
+          this.isBottomLoading = false;
+          this.reachBottom = false;
+          this.reachBottompadding = 0;
+          // this.getSignal = false;
+        }, 3000);
         // this.doMoreData()
         // .pipe(throttleTime(1000))
         // .subscribe(res=>{
