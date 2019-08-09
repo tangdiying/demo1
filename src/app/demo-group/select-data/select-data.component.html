@@ -1,0 +1,7 @@
+<div #container>
+  <div class="body" #body>
+      <ng-content #name></ng-content>
+  </div>
+  <div [hidden]="!isDraw" [ngStyle]="lineStyle" #line></div>
+</div>
+<button (click)="cancel()">cancel</button>

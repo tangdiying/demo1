@@ -76,5 +76,8 @@ export class GroupEntryComponent implements OnInit,OnChanges {
       this.isGetData = true
     })
   }
+  selectData(e){
+    console.log(e)
+  }
 
 }

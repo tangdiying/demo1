@@ -16,9 +16,10 @@ import { NzTableModule } from 'ng-zorro-antd';
 import { NoopInterceptorService } from './subject/noop-interceptor.service';
 import { Demo10Component } from './demo10/demo10.component';
 import { SubjectService } from './subject/subject.service';
-
+import { SquireSecletComponent } from './squire-seclet/squire-seclet.component';
+import { SelectDataComponent } from './select-data/select-data.component';
 @NgModule({
-  declarations: [GroupEntryComponent,Demo10Component],
+  declarations: [GroupEntryComponent,Demo10Component,SquireSecletComponent, SelectDataComponent],
   imports: [
     CommonModule,
     DemoGroupRoutingModule,
@@ -38,6 +39,6 @@ import { SubjectService } from './subject/subject.service';
     {provide:HTTP_INTERCEPTORS,useClass:NoopInterceptorService,multi:true},
     SubjectService
   ],
-  exports:[GroupEntryComponent]
+  exports:[GroupEntryComponent,SquireSecletComponent,SelectDataComponent]
 })
 export class DemoGroupModule { }

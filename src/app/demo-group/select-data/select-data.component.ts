@@ -1,16 +1,21 @@
-import { Component, OnInit, ViewChild, Input, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { fromEvent } from 'rxjs';
 
 @Component({
-  selector: 'app-squire-seclet',
-  templateUrl: './squire-seclet.component.html',
-  styleUrls: ['./squire-seclet.component.css']
+  selector: 'app-select-data',
+  templateUrl: './select-data.component.html',
+  styleUrls: ['./select-data.component.css']
 })
-export class SquireSecletComponent implements OnInit {
+export class SelectDataComponent implements OnInit {
+
   @Input() containerClass //最外层div的类名
   @Input() containerBodyClass //直接包裹元素的类名
   // @Input() contentTemplate:TemplateRef<any> //传入的模板，里面是由数据生成的元素
   @Input() selectClass = "select" //当标签被选中时添加的类名，最好不要与其他部分的类重名
   @Input() lineClass = "line"
+  @Input() dataSource;
+  @Input() handleClass;//控制在某个区域内是否可以被框选
+  @Output() selectData = new EventEmitter<any>()//返回被选中的数据
   @ViewChild("container") container
   @ViewChild("body") body
   @ViewChild("line") line
@@ -23,10 +28,15 @@ export class SquireSecletComponent implements OnInit {
     x:0,
     y:0
   }
-  div;
   isDraw = false;
   lineStyle;
   lineCopy;
+  userSelectData = []
+  mouseDown;
+  mouseMove;
+  mouseUp;
+  mouseClick;
+  isCheckMove:boolean = false;
   constructor() { 
   }
 
@@ -37,17 +47,16 @@ export class SquireSecletComponent implements OnInit {
     this.line.nativeElement.classList.add(this.lineClass)
   }
   bind(){
-    document.addEventListener("mousedown",(e)=>{
+    this.mouseDown=fromEvent(document,"mousedown")
+    .subscribe(e=>{
       this.pauseEvent(e)
       this.clearChild()
-      this.oldPosition.x = e.clientX;
-      this.oldPosition.y = e.clientY;
+      this.oldPosition.x = e['clientX'];
+      this.oldPosition.y = e['clientY'];
       if(!this.isDraw){
         this.isDraw = true;
       }
       this.lineStyle = {
-        // "left":this.oldPosition.x + "px",
-        // "top":this.oldPosition.y + "px",
         "width":"0px",
         "height":"0px"
       }
@@ -55,19 +64,13 @@ export class SquireSecletComponent implements OnInit {
         "width":0,
         "height":0
       }
-      // this.lineCopy.width = 0;
-      // this.lineCopy.height = 0;
     })
-    document.addEventListener("mousemove",(e)=>{
+    this.mouseMove=fromEvent(document,"mousemove")
+    .subscribe(e=>{
       if(this.isDraw){
-        this.nowPosition.x = e.clientX;
-        this.nowPosition.y = e.clientY;
-        // this.lineStyle = {
-        //   "left":this.oldPosition.x + "px",
-        //   "top":this.oldPosition.y + "px",
-        //   "width":this.nowPosition.x - this.oldPosition.x + "px",
-        //   "height":this.nowPosition.y - this.oldPosition.y + "px"
-        // }
+        this.isCheckMove = true;
+        this.nowPosition.x = e['clientX'];
+        this.nowPosition.y = e['clientY'];
         this.lineStyle.width=Math.abs(this.nowPosition.x-this.oldPosition.x)+"px";
         this.lineStyle.height=Math.abs(this.nowPosition.y-this.oldPosition.y)+"px";
         this.lineCopy.width = Math.abs(this.nowPosition.x-this.oldPosition.x);
@@ -87,24 +90,40 @@ export class SquireSecletComponent implements OnInit {
           this.lineCopy.top = this.oldPosition.y - (Math.abs(this.nowPosition.y-this.oldPosition.y))
         }
       }
-      
     })
-    document.addEventListener("mouseup",(e)=>{
-      if(this.isDraw){
-        this.isDraw = false;
+    this.mouseClick=fromEvent(document,"click")
+    .subscribe(e=>{
+      if(!this.isCheckMove){
+        this.lineCopy.top = e['clientY'];
+        this.lineCopy.left = e['clientX'];
       }
+      this.isCheckMove = false;
       this.selectChild()
       this.resetPosition();
     })
+    this.mouseUp=fromEvent(document,"mouseup")
+    .subscribe(e=>{
+      if(this.isDraw){
+        this.isDraw = false;
+      }
+      // this.selectChild()
+      // this.resetPosition();
+    })
   }
   selectChild(){
-    let children = this.body.nativeElement.children
+    let children;
+    if(this.handleClass){
+      children = document.getElementsByClassName(this.handleClass)[0].children
+    }else{
+      children = this.body.nativeElement.children
+    }
     for(let i=0;i<children.length;i++){
       if(children[i]['offsetLeft']+children[i]['clientWidth']>this.lineCopy.left&&children[i]['offsetTop']+children[i]['clientHeight']>this.lineCopy.top&&children[i]['offsetLeft']<(this.lineCopy.left+this.lineCopy.width)&&children[i]['offsetTop']<(this.lineCopy.top+this.lineCopy.height)){
         children[i].classList.add(this.selectClass)
+        this.userSelectData.push(this.dataSource[i])
       }
     }
-
+    this.selectData.emit(this.userSelectData)
   }
   resetPosition(){
     this.oldPosition.x = 0;
@@ -113,10 +132,17 @@ export class SquireSecletComponent implements OnInit {
     this.nowPosition.y = 0;
   }
   clearChild(){
-    for(let i = 0;i<this.body.nativeElement.children.length;i++){
-      let t =this.body.nativeElement.children[i]
-            t.classList.remove(this.selectClass)
+    let children;
+    if(this.handleClass){
+      children = document.getElementsByClassName(this.handleClass)[0].children
+    }else{
+      children = this.body.nativeElement.children
     }
+    for(let i = 0;i<children.length;i++){
+      let t =children[i]
+      t.classList.remove(this.selectClass)
+    }
+    this.userSelectData = []
   }
   pauseEvent(e){
     if(e.stopPropagation) e.stopPropagation();
@@ -125,4 +151,11 @@ export class SquireSecletComponent implements OnInit {
     e.returnValue=false;
     return false;
   }
+  cancel(){
+    this.mouseDown.unsubscribe();
+    this.mouseMove.unsubscribe();
+    this.mouseUp.unsubscribe();
+    this.mouseClick.unsubscribe();
+  }
+
 }

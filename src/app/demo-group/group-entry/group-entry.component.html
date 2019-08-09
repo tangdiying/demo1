@@ -25,9 +25,19 @@
   >
   <div class="child" *ngFor="let item of squareArray">{{item}}</div>
 </app-squire-seclet> -->
+<app-select-data
+[containerClass]="'container'"
+[containerBodyClass]="'body'"
+[selectClass]="'select'"
+[lineClass] = "'line'"
+[dataSource]="squareArray"
+(selectData)="selectData($event)"
+>
+<div class="child" *ngFor="let item of squareArray">{{item}}</div>
+</app-select-data>
   <!-- <app-demo8></app-demo8> -->
   <!-- <app-demo9 [listheight]="listheight" [listitemheight]="listitemheight"></app-demo9> -->
-  <div style="width: 200px;height: 100px;" id="myname">
+  <!-- <div style="width: 200px;height: 100px;" id="myname">
       <app-demo10
       [items]="items"
       (afterReachBottom)="getData($event)"
@@ -38,7 +48,7 @@
           <div *ngFor="let item of items;let i = index" class="item">{{item['id']}}---{{item['name']}}</div>
       </div>
       </app-demo10>
-  </div>
+  </div> -->
   <!-- <div style="width: 200px;height: 100px;">
       <app-demo18 [doMoreData]="doMoreData" 
       (pageIndexChange)="pageIndexChange($event)"
