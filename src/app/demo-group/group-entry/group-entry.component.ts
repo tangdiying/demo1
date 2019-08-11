@@ -35,7 +35,7 @@ export class GroupEntryComponent implements OnInit,OnChanges {
     ){
   }
   ngOnInit(): void {
-    for(let i=0;i<20;i++){
+    for(let i=0;i<40;i++){
       this.squareArray.push(i)
     }
     // this.getData();

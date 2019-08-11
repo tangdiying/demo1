@@ -98,7 +98,7 @@ export class SelectDataComponent implements OnInit {
         this.lineCopy.left = e['clientX'];
       }
       this.isCheckMove = false;
-      this.selectChild()
+      this.selectChild(e)
       this.resetPosition();
     })
     this.mouseUp=fromEvent(document,"mouseup")
@@ -110,7 +110,9 @@ export class SelectDataComponent implements OnInit {
       // this.resetPosition();
     })
   }
-  selectChild(){
+  selectChild(e){
+    let offsetX = e['pageX']-e['clientX'];
+    let offsetY = e['pageY']-e['clientY'];
     let children;
     if(this.handleClass){
       children = document.getElementsByClassName(this.handleClass)[0].children
@@ -118,7 +120,8 @@ export class SelectDataComponent implements OnInit {
       children = this.body.nativeElement.children
     }
     for(let i=0;i<children.length;i++){
-      if(children[i]['offsetLeft']+children[i]['clientWidth']>this.lineCopy.left&&children[i]['offsetTop']+children[i]['clientHeight']>this.lineCopy.top&&children[i]['offsetLeft']<(this.lineCopy.left+this.lineCopy.width)&&children[i]['offsetTop']<(this.lineCopy.top+this.lineCopy.height)){
+      // console.log(children[i]['offsetLeft'],children[i]['offsetTop'],offsetX,offsetY)
+      if(children[i]['offsetLeft']+children[i]['clientWidth']-offsetX>this.lineCopy.left&&children[i]['offsetTop']+children[i]['clientHeight']-offsetY>this.lineCopy.top&&children[i]['offsetLeft']-offsetX<(this.lineCopy.left+this.lineCopy.width)&&children[i]['offsetTop']-offsetY<(this.lineCopy.top+this.lineCopy.height)){
         children[i].classList.add(this.selectClass)
         this.userSelectData.push(this.dataSource[i])
       }
