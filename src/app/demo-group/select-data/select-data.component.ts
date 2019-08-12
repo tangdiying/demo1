@@ -36,7 +36,10 @@ export class SelectDataComponent implements OnInit {
   mouseMove;
   mouseUp;
   mouseClick;
+  childMouseDown;
   isCheckMove:boolean = false;
+  domOffSetX=0;
+  domOffSetY=0;
   constructor() { 
   }
 
@@ -45,26 +48,35 @@ export class SelectDataComponent implements OnInit {
     this.container.nativeElement.classList.add(this.containerClass)
     this.body.nativeElement.classList.add(this.containerBodyClass)
     this.line.nativeElement.classList.add(this.lineClass)
+    this.getParent()
   }
   bind(){
-    this.mouseDown=fromEvent(document,"mousedown")
+    let children;
+    if(this.handleClass){
+      children = document.getElementsByClassName(this.handleClass)[0]
+    }else{
+      children = this.body.nativeElement
+    }
+    this.mouseDown=fromEvent(children,"mousedown")
     .subscribe(e=>{
-      this.pauseEvent(e)
-      this.clearChild()
-      this.oldPosition.x = e['clientX'];
-      this.oldPosition.y = e['clientY'];
-      if(!this.isDraw){
-        this.isDraw = true;
-      }
-      this.lineStyle = {
-        "width":"0px",
-        "height":"0px"
-      }
-      this.lineCopy = {
-        "width":0,
-        "height":0
-      }
+        this.clearChild()
+        this.getParent()
+        this.oldPosition.x = e['clientX'];
+        this.oldPosition.y = e['clientY'];
+        if(!this.isDraw){
+            this.isDraw = true;
+        }
+        this.lineStyle = {
+            "width":"0px",
+            "height":"0px"
+        }
+        this.lineCopy = {
+            "width":0,
+            "height":0
+        }
+        this.pauseEvent(e)
     })
+    
     this.mouseMove=fromEvent(document,"mousemove")
     .subscribe(e=>{
       if(this.isDraw){
@@ -91,8 +103,7 @@ export class SelectDataComponent implements OnInit {
         }
       }
     })
-    this.mouseClick=fromEvent(document,"click")
-    .subscribe(e=>{
+    children.addEventListener("click",(e)=>{
       if(!this.isCheckMove){
         this.lineCopy.top = e['clientY'];
         this.lineCopy.left = e['clientX'];
@@ -120,8 +131,7 @@ export class SelectDataComponent implements OnInit {
       children = this.body.nativeElement.children
     }
     for(let i=0;i<children.length;i++){
-      // console.log(children[i]['offsetLeft'],children[i]['offsetTop'],offsetX,offsetY)
-      if(children[i]['offsetLeft']+children[i]['clientWidth']-offsetX>this.lineCopy.left&&children[i]['offsetTop']+children[i]['clientHeight']-offsetY>this.lineCopy.top&&children[i]['offsetLeft']-offsetX<(this.lineCopy.left+this.lineCopy.width)&&children[i]['offsetTop']-offsetY<(this.lineCopy.top+this.lineCopy.height)){
+      if(children[i]['offsetLeft']+children[i]['clientWidth']-offsetX+this.domOffSetX>this.lineCopy.left&&children[i]['offsetTop']+children[i]['clientHeight']-offsetY+this.domOffSetY>this.lineCopy.top&&children[i]['offsetLeft']-offsetX+this.domOffSetX<(this.lineCopy.left+this.lineCopy.width)&&children[i]['offsetTop']-offsetY+this.domOffSetY<(this.lineCopy.top+this.lineCopy.height)){
         children[i].classList.add(this.selectClass)
         this.userSelectData.push(this.dataSource[i])
       }
@@ -158,7 +168,24 @@ export class SelectDataComponent implements OnInit {
     this.mouseDown.unsubscribe();
     this.mouseMove.unsubscribe();
     this.mouseUp.unsubscribe();
-    this.mouseClick.unsubscribe();
+    // this.mouseClick.unsubscribe();
+    // this.childMouseDown.unsubscribe();
+  }
+  getParent(){
+    let children;
+    if(this.handleClass){
+      children = document.getElementsByClassName(this.handleClass)[0]
+    }else{
+      children = this.body.nativeElement
+    }
+    let t = children.offsetTop;
+    let l = children.offsetLeft;
+    while(children=children.offsetParent){
+      t+=children.offsetTop;
+      l+=children.offsetLeft;
+    }
+    this.domOffSetX = l;
+    this.domOffSetY = t;
   }
 
 }
