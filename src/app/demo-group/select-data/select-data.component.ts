@@ -103,7 +103,9 @@ export class SelectDataComponent implements OnInit {
         }
       }
     })
-    children.addEventListener("click",(e)=>{
+    
+    this.mouseClick = fromEvent(children,"click")
+    .subscribe(e=>{
       if(!this.isCheckMove){
         this.lineCopy.top = e['clientY'];
         this.lineCopy.left = e['clientX'];
@@ -168,7 +170,7 @@ export class SelectDataComponent implements OnInit {
     this.mouseDown.unsubscribe();
     this.mouseMove.unsubscribe();
     this.mouseUp.unsubscribe();
-    // this.mouseClick.unsubscribe();
+    this.mouseClick.unsubscribe();
     // this.childMouseDown.unsubscribe();
   }
   getParent(){
